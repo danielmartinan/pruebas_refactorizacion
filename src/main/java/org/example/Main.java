@@ -2,6 +2,14 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello, World!");
+        // Pruebas de uso de CarritoCompra
+        String[] productos = {"Laptop", "Mouse", "Teclado"};
+        double[] precios = {1000.0, 50.0, 80.0};
+        int[] cantidades = {1, 2, 1};
+        String tipoDescuento = "Cupon10";
+        String metodoPago = "Tarjeta";
+
+        CarritoCompra carrito = new CarritoCompra(productos, precios, cantidades, tipoDescuento, metodoPago);
+        carrito.procesarCompra();
     }
 }

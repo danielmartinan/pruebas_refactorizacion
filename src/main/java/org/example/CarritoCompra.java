@@ -16,47 +16,54 @@ public class CarritoCompra {
     }
 
     public void procesarCompra() {
-        // Validar que los arrays tengan la misma longitud
-        if (prd.length == prc.length && prd.length == c.length) {
-            // Calcular el total
-            double total = 0;
-            for (int i = 0; i < prd.length; i++) {
-                System.out.println("Producto: " + prd[i] + ", Cantidad: " + c[i] + ", Precio: " + prc[i]);
-                total += prc[i] * c[i];
-            }
+        // Validar que los arrays tengan la misma longitud y no exceda el límite máximpo de 10 productos
+        if (prd.length < 10 && prc.length < 10 && c.length < 10) {
+            if (prd.length == prc.length && prd.length == c.length) {
+                // Calcular el total
+                double total = 0;
+                for (int i = 0; i < prd.length; i++) {
+                    System.out.println(
+                        "Producto: " + prd[i] + ", Cantidad: " + c[i] + ", Precio: " + prc[i]);
+                    total += prc[i] * c[i];
+                }
 
-            System.out.println("Total sin descuento: " + total);
+                System.out.println("Total sin descuento: " + total);
 
-            // Aplicar descuento
-            if (tipoDescuento.equals("Cupon10")) {
-                total = total - (total * 0.10);
-            } else if (tipoDescuento.equals("BlackFriday")) {
-                total = total - (total * 0.25);
-            }
+                // Aplicar descuento
+                if (tipoDescuento.equals("Cupon10")) {
+                    total = total - (total * 0.10);
+                } else if (tipoDescuento.equals("BlackFriday")) {
+                    total = total - (total * 0.25);
+                }
 
-            System.out.println("Total con descuento: " + total);
+                System.out.println("Total con descuento: " + total);
 
-            // Procesar pago
-            if (metodoPago.equals("Tarjeta")) {
-                System.out.println("Procesando pago con tarjeta de crédito...");
-            } else if (metodoPago.equals("PayPal")) {
-                System.out.println("Procesando pago con PayPal...");
-            } else if (metodoPago.equals("Transferencia")) {
-                System.out.println("Procesando pago mediante transferencia bancaria...");
+                // Procesar pago
+                if (metodoPago.equals("Tarjeta")) {
+                    System.out.println("Procesando pago con tarjeta de crédito...");
+                } else if (metodoPago.equals("PayPal")) {
+                    System.out.println("Procesando pago con PayPal...");
+                } else if (metodoPago.equals("Transferencia")) {
+                    System.out.println("Procesando pago mediante transferencia bancaria...");
+                } else {
+                    System.out.println("Método de pago no soportado.");
+                }
+
+                System.out.println("Compra procesada con éxito.");
+
+                //vaciar carrito
+                prd = new String[0];
+                prc = new double[0];
+                c = new int[0];
+                tipoDescuento = "Ninguno";
+                metodoPago = "Ninguno";
             } else {
-                System.out.println("Método de pago no soportado.");
+                System.out.println(
+                    "Error: Los arrays de productos, precios y cantidades deben tener la misma longitud.");
+                return;
             }
-
-            System.out.println("Compra procesada con éxito.");
-
-            //vaciar carrito
-            prd = new String[0];
-            prc = new double[0];
-            c = new int[0];
-            tipoDescuento = "Ninguno";
-            metodoPago = "Ninguno";
         } else {
-            System.out.println("Error: Los arrays de productos, precios y cantidades deben tener la misma longitud.");
+            System.out.println("Error: No se pueden procesar más de 10 productos.");
             return;
         }
     }
